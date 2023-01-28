@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
 using System.Text;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GestorExpediente.Controllers
 {
@@ -130,7 +131,7 @@ namespace GestorExpediente.Controllers
         }
 
         [HttpPost("nuevo")]
-        //[Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador")]
         public ActionResult nuevo(ExpedienteDTO nuevo)
         {
             try
@@ -176,7 +177,7 @@ namespace GestorExpediente.Controllers
         }
 
         [HttpPut("actualizar")]
-        //[Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador")]
         public ActionResult actualizar(ExpedienteDTO actualiza)
         {
             string oldName = "";
@@ -216,7 +217,7 @@ namespace GestorExpediente.Controllers
         }
 
         [HttpDelete("eliminar/{IdExpediente}")]
-        //[Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador")]
         public ActionResult eliminar(int IdExpediente)
         {
             var item = (from h in _contexto.Expediente where h.Id == IdExpediente select h).FirstOrDefault();

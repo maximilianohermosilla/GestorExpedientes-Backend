@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GestorExpediente.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,7 +46,7 @@ namespace GestorExpediente.Controllers
         }
 
         [HttpPost("nuevo")]
-        //[Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador")]
         public ActionResult nuevo(SituacionRevista nuevo)
         {
             try
@@ -69,7 +70,7 @@ namespace GestorExpediente.Controllers
         }
 
         [HttpPut("actualizar")]
-        //[Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador")]
         public ActionResult actualizar(SituacionRevista actualiza)
         {
             string oldName = "";
@@ -97,7 +98,7 @@ namespace GestorExpediente.Controllers
         }
 
         [HttpDelete("eliminar/{IdSituacionRevista}")]
-        //[Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador")]
         public ActionResult eliminar(int IdSituacionRevista)
         {
             var item = (from h in _contexto.SituacionRevista where h.Id == IdSituacionRevista select h).FirstOrDefault();

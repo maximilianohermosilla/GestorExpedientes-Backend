@@ -47,7 +47,7 @@ namespace GestorExpediente.Controllers
         }
 
         [HttpPost("nuevo")]
-        //[Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador")]
         public ActionResult nuevo(Acto nuevo)
         {
             try
@@ -71,7 +71,7 @@ namespace GestorExpediente.Controllers
         }
 
         [HttpPut("actualizar")]
-        //[Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador")]
         public ActionResult actualizar(Acto actualiza)
         {
             string oldName = "";
@@ -99,7 +99,7 @@ namespace GestorExpediente.Controllers
         }
 
         [HttpDelete("eliminar/{IdActo}")]
-        //[Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador")]
         public ActionResult eliminar(int IdActo)
         {
             var item = (from h in _contexto.Acto where h.Id == IdActo select h).FirstOrDefault();
