@@ -21,7 +21,11 @@ public partial class GestorExpedienteContext : DbContext
 
     public virtual DbSet<Expediente> Expediente { get; set; }
 
+    public virtual DbSet<Perfil> Perfil { get; set; }
+
     public virtual DbSet<SituacionRevista> SituacionRevista { get; set; }
+
+    public virtual DbSet<Usuario> Usuario { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -72,11 +76,38 @@ public partial class GestorExpedienteContext : DbContext
                 .HasConstraintName("FK_Expediente_SituacionRevista");
         });
 
+        modelBuilder.Entity<Perfil>(entity =>
+        {
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+        });
+
         modelBuilder.Entity<SituacionRevista>(entity =>
         {
             entity.Property(e => e.Nombre)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<Usuario>(entity =>
+        {
+            entity.Property(e => e.Correo)
+                .HasMaxLength(150)
+                .IsUnicode(false);
+            entity.Property(e => e.Login)
+                .HasMaxLength(150)
+                .IsUnicode(false);
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(150)
+                .IsUnicode(false);
+            entity.Property(e => e.Password)
+                .HasMaxLength(150)
+                .IsUnicode(false);
+
+            entity.HasOne(d => d.IdPerfilNavigation).WithMany(p => p.Usuario)
+                .HasForeignKey(d => d.IdPerfil)
+                .HasConstraintName("FK_Usuario_Perfil");
         });
 
         OnModelCreatingPartial(modelBuilder);

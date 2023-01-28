@@ -82,3 +82,4 @@ F:\GitHub\Net\GestorExpedientes-Backend\GestorExpediente\GestorExpediente\obj\De
 F:\GitHub\Net\GestorExpedientes-Backend\GestorExpediente\GestorExpediente\obj\Debug\net6.0\ref\GestorExpediente.dll
 F:\GitHub\Net\GestorExpedientes-Backend\GestorExpediente\GestorExpediente\bin\Debug\net6.0\AutoMapper.dll
 F:\GitHub\Net\GestorExpedientes-Backend\GestorExpediente\GestorExpediente\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+F:\GitHub\Net\GestorExpedientes-Backend\GestorExpediente\GestorExpediente\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
