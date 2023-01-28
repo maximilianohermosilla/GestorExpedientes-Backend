@@ -16,8 +16,8 @@ namespace GestorExpediente.DTO
         public int? IdSituacionRevista { get; set; }
         public string? SituacionRevistaNombre { get; set; }
         public DateTime? FechaExpediente { get; set; }
-        public int? FirmadoSumario { get; set; }
-        public int? FirmadoLaborales { get; set; }
+        public bool? FirmadoSumario { get; set; }
+        public bool? FirmadoLaborales { get; set; }
         public bool? EnviadoLaborales { get; set; }
         public bool? Avisado { get; set; }
         public string? Observaciones { get; set; }

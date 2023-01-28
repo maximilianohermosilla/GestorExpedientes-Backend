@@ -23,9 +23,9 @@ public partial class Expediente
 
     public DateTime? FechaExpediente { get; set; }
 
-    public int? FirmadoSumario { get; set; }
+    public bool? FirmadoSumario { get; set; }
 
-    public int? FirmadoLaborales { get; set; }
+    public bool? FirmadoLaborales { get; set; }
 
     public bool? EnviadoLaborales { get; set; }
 
