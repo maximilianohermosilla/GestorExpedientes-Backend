@@ -57,6 +57,37 @@ namespace GestorExpediente.Controllers
             return Accepted(expedientesDTO);
         }
 
+        [HttpGet("listarPendientes/")]
+        public ActionResult<IEnumerable<Expediente>> ExpedientesPendientes()
+        {
+            var lst = (from tbl in _contexto.Expediente where tbl.Id > 0 && (tbl.EnviadoLaborales == false || tbl.Avisado == false) select tbl).ToList();
+
+            List<ExpedienteDTO> expedientesDTO = _mapper.Map<List<ExpedienteDTO>>(lst);
+
+            foreach (var item in expedientesDTO)
+            {
+                var acto = (from h in _contexto.Acto where h.Id == item.IdActo select h).FirstOrDefault();
+                if (acto != null)
+                {
+                    item.ActoNombre = acto.Nombre;
+                }
+
+                var caratula = (from h in _contexto.Caratula where h.Id == item.IdCaratula select h).FirstOrDefault();
+                if (caratula != null)
+                {
+                    item.CaratulaNombre = caratula.Nombre;
+                }
+
+                var situacionRevista = (from h in _contexto.SituacionRevista where h.Id == item.IdSituacionRevista select h).FirstOrDefault();
+                if (situacionRevista != null)
+                {
+                    item.SituacionRevistaNombre = situacionRevista.Nombre;
+                }
+            }
+
+            return Accepted(expedientesDTO);
+        }
+
 
         [HttpGet("buscar/{IdExpediente}")]
         public ActionResult<Expediente> Expedientes(int IdExpediente)
@@ -157,8 +188,20 @@ namespace GestorExpediente.Controllers
                 {
                     return NotFound(actualiza);
                 }
-                oldName = item.Nombre;
+                oldName = item.Expediente1;
                 item.Nombre = actualiza.Nombre;
+                item.Expediente1 = actualiza.Expediente1;
+                item.Fecha = actualiza.Fecha;
+                item.Documento = actualiza.Documento;
+                item.IdCaratula = actualiza.IdCaratula;
+                item.IdActo = actualiza.IdActo;
+                item.IdSituacionRevista = actualiza.IdSituacionRevista;
+                item.FechaExpediente = actualiza.FechaExpediente;
+                item.FirmadoSumario = actualiza.FirmadoSumario;
+                item.FirmadoLaborales = actualiza.FirmadoLaborales;
+                item.EnviadoLaborales = actualiza.EnviadoLaborales;
+                item.Avisado = actualiza.Avisado;
+                item.Observaciones = actualiza.Observaciones;
 
                 _contexto.Expediente.Update(item);
                 _contexto.SaveChanges();
